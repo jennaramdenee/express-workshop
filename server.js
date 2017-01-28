@@ -1,13 +1,26 @@
 var express = require('express')
 var formidable = require('express-formidable')
 var app = express()
+var fs = require('fs')
 
 app.use(formidable())
 
 app.use(express.static("public"))
 
+
 app.post("/create-post", function(request, response){
-  console.log(request.fields.blogpost)
+  //read stuff already in the file
+  fs.readFile(__dirname + '/data/posts.json', function (error, file) {
+    var parsedFile = JSON.parse(file)
+    //add new post to existing parsedFile object as new key/value pair
+    parsedFile[Date.now()] = request.fields.blogpost
+    var data = JSON.stringify(parsedFile)
+    //write to the file including stuff already in the file
+    fs.writeFile(__dirname + '/data/posts.json', data, function(error){
+      if (error) { console.error }
+    })
+  });
+
 })
 
 app.listen(3000, function(){
