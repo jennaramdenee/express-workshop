@@ -17,10 +17,14 @@ app.post("/create-post", function(request, response){
     var data = JSON.stringify(parsedFile)
     //write to the file including stuff already in the file
     fs.writeFile(__dirname + '/data/posts.json', data, function(error){
-      if (error) { console.error }
+      if (error) { console.log(error) }
     })
   });
 
+})
+
+app.get("/get-posts", function(request, response){
+  response.sendFile(__dirname + '/data/posts.json')
 })
 
 app.listen(3000, function(){
