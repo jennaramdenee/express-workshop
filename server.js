@@ -1,16 +1,13 @@
 var express = require('express')
+var formidable = require('express-formidable')
 var app = express()
 
-app.get("/", function(request, response){
-  response.send("Yay Node Girls!")
-})
+app.use(formidable())
 
-app.get("/node", function(request, response){
-  response.send("Gotta love Node!")
-})
+app.use(express.static("public"))
 
-app.get("/girls", function(request, response){
-  response.send("Girl power!")
+app.post("/create-post", function(request, response){
+  console.log(request.fields.blogpost)
 })
 
 app.listen(3000, function(){
