@@ -5,11 +5,13 @@ app.get("/", function(request, response){
   response.send("Yay Node Girls!")
 })
 
-// app.get("/node", function(request, response){
-//   response.send("Gotta love Node!")
-// })
-//
-// app.get("/")
+app.get("/node", function(request, response){
+  response.send("Gotta love Node!")
+})
+
+app.get("/girls", function(request, response){
+  response.send("Girl power!")
+})
 
 app.listen(3000, function(){
   console.log("Server is listening on port 3000. Ready to accept requests!")
